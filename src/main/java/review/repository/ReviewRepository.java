@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends CrudRepository<Review, Long> {
     List<Place> findByPlace(Place place);
+    List<Place> findByPlaceAndByIsDeletedFalse(Place place);
 }

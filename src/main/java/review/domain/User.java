@@ -1,8 +1,11 @@
 package review.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 public class User {
 
     @Id

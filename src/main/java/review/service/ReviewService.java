@@ -28,7 +28,7 @@ public class ReviewService {
         String type = reviewDto.getType();
         User user = userRepository.findById(reviewDto.getUserId()).get();
         Place place = placeRepository.findById(reviewDto.getPlaceId()).get();
-        Boolean isFirstReview = reviewRepository.findByPlace(place).isEmpty();
+        Boolean isFirstReview = reviewRepository.findByPlaceAndByIsDeletedFalse(place).isEmpty();
         List<Long> photoIds = reviewDto.getPhotoIds();
         List<Photo> photos = new ArrayList<>();
 
@@ -41,7 +41,6 @@ public class ReviewService {
         int point = 0;
 
         switch(type) {
-            // 리뷰만 처리해주고, Point, target에 올바른 값 저장
             case "ADD":
                 target = reviewRepository.save(reviewDto.toReview(user, place, photos, isFirstReview));
                 point = target.getPoint();
@@ -60,10 +59,8 @@ public class ReviewService {
                 history = pointHistoryRepository.save(new PointHistory(user, target, point, type));
                 break;
             default :
-
         }
 
         userRepository.save(userRepository.findById(reviewDto.getUserId()).get().updatePoint(point));
-        //유저아이디, 리뷰아이디, 포인트증감, 생성or수정or삭제
     }
 }

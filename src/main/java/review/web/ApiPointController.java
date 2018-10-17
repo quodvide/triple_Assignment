@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import review.domain.PointHistory;
 import review.domain.User;
 import review.dto.ReviewDto;
 import review.service.PointService;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.List;
 
 import static review.util.Util.SESSIONED_USER;
 
@@ -22,10 +25,17 @@ public class ApiPointController {
     PointService pointService;
 
     @GetMapping
-    public ResponseEntity<Void> getPoint(HttpSession httpSession) {
+    public ResponseEntity<Integer> getPoint(HttpSession httpSession) {
         User user = (User)httpSession.getAttribute(SESSIONED_USER);
-        pointService.getPoint(user);
-        return ResponseEntity.ok().build();
+        int point = pointService.getPoint(user);
+        return ResponseEntity.ok(point);
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<List<PointHistory>> getPointDetail(HttpSession httpSession) {
+        User user = (User)httpSession.getAttribute(SESSIONED_USER);
+        List<PointHistory> detail = pointService.getPointDetail(user);
+        return ResponseEntity.ok(detail);
     }
 
 }
