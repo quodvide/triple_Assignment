@@ -106,6 +106,9 @@ create table point_history (
 	FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
+create index IDX_POINT_HISTORY ON point_history (user_id);
+create index IDX_REVIEW_EXISTS ON review (place_id, is_deleted);
+
 ```
 
 ## API

@@ -23,14 +23,14 @@ public class ApiPointController {
 
     @GetMapping
     public ResponseEntity<Integer> getPoint(HttpSession httpSession) {
-        User user = (User)httpSession.getAttribute(SESSIONED_USER);
+        User user = (User) httpSession.getAttribute(SESSIONED_USER);
         int point = pointService.getPoint(user);
         return ResponseEntity.ok(point);
     }
 
     @GetMapping("/details")
     public ResponseEntity<List<PointHistory>> getPointDetail(HttpSession httpSession) {
-        User user = (User)httpSession.getAttribute(SESSIONED_USER);
+        User user = (User) httpSession.getAttribute(SESSIONED_USER);
         List<PointHistory> detail = pointService.getPointDetail(user);
         return ResponseEntity.ok(detail);
     }

@@ -25,9 +25,9 @@ public class ReviewDto {
 
     private int evaluate(boolean isFirstReview) {
         int point = 0;
-        if(content.length() >= 1) point++;
-        if(photoIds.size() >= 1) point++;
-        if(isFirstReview) point++;
+        if (content.length() >= 1) point++;
+        if (photoIds.size() >= 1) point++;
+        if (isFirstReview) point++;
 
         return point;
     }
