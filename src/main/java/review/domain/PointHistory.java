@@ -13,12 +13,14 @@ public class PointHistory {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_point_history_user"))
     private User user;
     @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_point_history_review"))
     private Review review;
-    @Column
+    @Column(nullable = false)
     private int pointChange;
-    @Column
+    @Column(nullable = false)
     private String type;
 
     public PointHistory(User user, Review review, int pointChange, String type) {

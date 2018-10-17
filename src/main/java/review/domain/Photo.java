@@ -1,15 +1,16 @@
 package review.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
+
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_photo_review"))
+    private Review review;
 
 }

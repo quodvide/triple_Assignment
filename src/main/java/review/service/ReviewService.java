@@ -28,7 +28,7 @@ public class ReviewService {
         String type = reviewDto.getType();
         User user = userRepository.findById(reviewDto.getUserId()).get();
         Place place = placeRepository.findById(reviewDto.getPlaceId()).get();
-        Boolean isFirstReview = reviewRepository.findByPlaceAndByIsDeletedFalse(place).isEmpty();
+        Boolean isFirstReview = reviewRepository.findByPlaceAndIsDeletedFalse(place).isEmpty();
         List<Long> photoIds = reviewDto.getPhotoIds();
         List<Photo> photos = new ArrayList<>();
 
